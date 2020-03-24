@@ -1,6 +1,3 @@
-#:include secondwindow.kv
-
-
 <BlackLabel@Label>:
     color: (0,0,0,1)
 
@@ -138,20 +135,3 @@
             text: "indietro"
             on_release:
                 root.go_back()
-
-
-#<WindowManager@ScreenManager>:
-#
-#    Screen:
-#        name: "mainscreen"
-#
-#        BoxLayout:
-#            orientation: "vertical"
-#            Label:
-#                text: "main screen"
-#            Button:
-#                text: "to screen 1"
-#                on_press: app.root.current = "secondwindow"
-#            Button:
-#                text: "to screen 2"
-#                on_press: app.root.current = "screen2"
