@@ -1,0 +1,18 @@
+<SecondWindow@Screen>:
+    name: "secondwindow"
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: (1,1,1,1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        orientation: "vertical"
+        Label:
+            text: "Grazie per aver compilato il form"
+        Button:
+            size_hint_y: None
+            height: 50
+            text: "indietro"
+            on_release:
+                app.root.current = "mainscreen"
