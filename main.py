@@ -14,6 +14,9 @@ class CustomPopup(Popup):
     invia_form = ObjectProperty(None)
 
     def dismiss_popup(self):
+        '''
+        MODIFY: chiusura del popup
+        '''
         self.dismiss()
 
 
@@ -25,10 +28,17 @@ class MainWindow(Screen):
     luogo_di_nascita = ObjectProperty(None)
 
     def conferma_invio_form(self):
+        '''
+        MODIFY: crea una finestra popup per una conferma di invio del form compilato
+        '''
         custom_popup = CustomPopup(title="Conferma invio form", size_hint=(0.5, 0.5), invia_form=self.invia_form)
         custom_popup.open()
 
     def invia_form(self):
+        '''
+        MODIFY: crea (o modifica) un file su desktop contenente le informazioni immesse nei campi
+                modifica la schermata visualizzata passando alla SecondWindow
+        '''
         form = open("/home/tobia/Desktop/form.txt", "w+")
         form.write("Nome: ")
         form.write(self.nome.text)
@@ -42,12 +52,14 @@ class MainWindow(Screen):
         form.write("Luogo di nascita: ")
         form.write(self.luogo_di_nascita.text)
         form.write("\n")
-
         sm.switch_to(screens[1], direction="left")
 
 
 class SecondWindow(Screen):
     def go_back(self):
+        '''
+        MODIFY: cambia la finestra visualizzata passando alla MainWindow
+        '''
         sm.switch_to(screens[0], direction="right")
 
 
@@ -55,15 +67,19 @@ class WindowManager(ScreenManager):
     pass
 
 
+# caricamento del file kivy
 kv = Builder.load_file("style.kv")
 
+# creazione dello screen manager che viene usato per gestire gli Screen (schermate)
 sm = WindowManager(transition=SlideTransition())
 
+# lista degli screen (schermate)
 screens = [MainWindow(name="mainwindow"), SecondWindow(name="secondwindow")]
 
 for screen in screens:
     sm.add_widget(screen)
 
+# definizione della schermata da visualizzare all'apertura dell'applicazione
 sm.current = "mainwindow"
 
 

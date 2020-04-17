@@ -1,6 +1,8 @@
+# defnizione di una Label per il testo
 <BlackLabel@Label>:
     color: (0,0,0,1)
 
+# definizione di una Label per il titolo personalizzata
 <TitleLabel@Label>:
     canvas.before:
         Color:
@@ -10,23 +12,7 @@
             pos: self.pos
     color: (1, 1, 1, 1)
 
-<CustomDropDown>:
-    Button:
-        text: 'College Name'
-        size_hint_y: None
-        height: 44
-        on_release: root.select('College is')
-    Label:
-        text: 'Not in college'
-        size_hint_y: None
-        height: 44
-    Button:
-        text: 'KccItm'
-        size_hint_y: None
-        height: 44
-        on_release: root.select('Kcc')
-
-
+# stile della schermata MainWindow
 <MainWindow>:
     submit_button: submit_button
     nome: nome
@@ -102,6 +88,7 @@
             Label:
 
 
+# definizione dello stile per la finestra popup
 <CustomPopup>:
     invia_form: invia_form
     BoxLayout:
@@ -131,7 +118,7 @@
                     root.invia_form()
                     root.dismiss_popup()
 
-
+# definizione stile schermata SecondWindow
 <SecondWindow>:
     name: "secondwindow"
     BoxLayout:
