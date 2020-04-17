@@ -10,6 +10,22 @@
             pos: self.pos
     color: (1, 1, 1, 1)
 
+<CustomDropDown>:
+    Button:
+        text: 'College Name'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('College is')
+    Label:
+        text: 'Not in college'
+        size_hint_y: None
+        height: 44
+    Button:
+        text: 'KccItm'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('Kcc')
+
 
 <MainWindow>:
     submit_button: submit_button
@@ -77,7 +93,6 @@
                 id: submit_button
                 background_normal: ""
                 background_color: (1, 0.5, 0, 1)
-                background_down: ""
                 text: "Invia"
                 on_press:
                     self.background_color = (1, 0, 0, 0.8)
@@ -101,7 +116,6 @@
             text: "Sei sicuro di inviare il form?"
             color: ( (1, 0.5, 0, 1))
         BoxLayout:
-
             Button:
                 size_hint_y: None
                 height: 50
@@ -117,6 +131,7 @@
                     root.invia_form()
                     root.dismiss_popup()
 
+
 <SecondWindow>:
     name: "secondwindow"
     BoxLayout:
@@ -128,6 +143,7 @@
                 pos: self.pos
         orientation: "vertical"
         Label:
+            color: (0, 0, 0, 1)
             text: "Grazie per aver compilato il form"
         Button:
             size_hint_y: None
@@ -135,3 +151,12 @@
             text: "indietro"
             on_release:
                 root.go_back()
+
+
+
+
+
+
+
+
+

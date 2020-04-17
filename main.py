@@ -2,7 +2,12 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.app import App
 from kivy.uix.popup import Popup
-from kivy.uix.screenmanager import Screen, ScreenManager, WipeTransition
+from kivy.uix.screenmanager import Screen, ScreenManager, WipeTransition, SlideTransition
+from kivy.uix.dropdown import DropDown
+
+
+class CustomDropDown(DropDown):
+    pass
 
 
 class CustomPopup(Popup):
@@ -37,12 +42,13 @@ class MainWindow(Screen):
         form.write("Luogo di nascita: ")
         form.write(self.luogo_di_nascita.text)
         form.write("\n")
-        sm.current = "secondwindow"
+
+        sm.switch_to(screens[1], direction="left")
 
 
 class SecondWindow(Screen):
     def go_back(self):
-        sm.current = "mainwindow"
+        sm.switch_to(screens[0], direction="right")
 
 
 class WindowManager(ScreenManager):
@@ -51,8 +57,7 @@ class WindowManager(ScreenManager):
 
 kv = Builder.load_file("style.kv")
 
-
-sm = WindowManager(transition=WipeTransition())
+sm = WindowManager(transition=SlideTransition())
 
 screens = [MainWindow(name="mainwindow"), SecondWindow(name="secondwindow")]
 
