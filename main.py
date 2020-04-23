@@ -24,8 +24,11 @@ class MainWindow(Screen):
     submit_button = ObjectProperty(None)
     nome = ObjectProperty(None)
     cognome = ObjectProperty(None)
-    data_di_nascita = ObjectProperty(None)
+    giorno = ObjectProperty(None)
+    mese = ObjectProperty(None)
+    anno = ObjectProperty(None)
     luogo_di_nascita = ObjectProperty(None)
+    professione = ObjectProperty(None)
 
     def conferma_invio_form(self):
         '''
@@ -33,6 +36,9 @@ class MainWindow(Screen):
         '''
         custom_popup = CustomPopup(title="Conferma invio form", size_hint=(0.5, 0.5), invia_form=self.invia_form)
         custom_popup.open()
+
+    def ottieni_data_nascita(self):
+        return self.giorno.text + " " + self.mese.text + " " + self.anno.text
 
     def invia_form(self):
         '''
@@ -47,11 +53,12 @@ class MainWindow(Screen):
         form.write(self.cognome.text)
         form.write("\n")
         form.write("Data di nascita: ")
-        form.write(self.data_di_nascita.text)
+        form.write(self.ottieni_data_nascita())
         form.write("\n")
         form.write("Luogo di nascita: ")
         form.write(self.luogo_di_nascita.text)
         form.write("\n")
+        form.write("professione: " + self.professione.text)
         sm.switch_to(screens[1], direction="left")
 
 
