@@ -6,5 +6,3 @@ e riguarda la creazione di un form generico da compilare.
 Il programma crea in seguito un file di testo con le informazioni immesse nei campi, vengono visti i widget principali come 
 BoxLayout, Label, TextInput, Popup, Screen e ScreenManager.
 
-
-A breve inserirò i commenti nel codice per renderlo più chiaro
