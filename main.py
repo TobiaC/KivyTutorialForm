@@ -45,7 +45,7 @@ class MainWindow(Screen):
         MODIFY: crea (o modifica) un file su desktop contenente le informazioni immesse nei campi
                 modifica la schermata visualizzata passando alla SecondWindow
         '''
-        form = open("/home/tobia/Desktop/form.txt", "w+")
+        form = open("/home/tobiac/Scrivania/form.txt", "w+")
         form.write("Nome: ")
         form.write(self.nome.text)
         form.write("\n")
