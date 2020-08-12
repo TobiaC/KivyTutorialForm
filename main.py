@@ -29,6 +29,10 @@ class MainWindow(Screen):
     anno = ObjectProperty(None)
     luogo_di_nascita = ObjectProperty(None)
     professione = ObjectProperty(None)
+    patenteA = ObjectProperty(None)
+    patenteB = ObjectProperty(None)
+    patenteC = ObjectProperty(None)
+
 
     def conferma_invio_form(self):
         '''
@@ -41,6 +45,7 @@ class MainWindow(Screen):
         return self.giorno.text + " " + self.mese.text + " " + self.anno.text
 
     def invia_form(self):
+        patenti = "Patenti in possesso: "
         '''
         MODIFY: crea (o modifica) un file su desktop contenente le informazioni immesse nei campi
                 modifica la schermata visualizzata passando alla SecondWindow
@@ -59,6 +64,14 @@ class MainWindow(Screen):
         form.write(self.luogo_di_nascita.text)
         form.write("\n")
         form.write("professione: " + self.professione.text)
+        form.write("\n")
+        if self.patenteA.active:
+            patenti = patenti + "A "
+        if self.patenteB.active:
+            patenti = patenti + "B "
+        if self.patenteC.active:
+            patenti = patenti + "C "
+        form.write(patenti)
         sm.switch_to(screens[1], direction="left")
 
 

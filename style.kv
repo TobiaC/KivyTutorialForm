@@ -23,6 +23,11 @@
     multiline: False
     halign: "center"
 
+<CustomButton@Button>:
+    background_normal: ""
+    background_color: (1, 0.5, 0, 1)
+    on_press: self.background_color = (1, 0, 0, 0.8)
+    on_release: self.background_color = (1, 0.5, 0, 1)
 
 # stile della schermata MainWindow
 <MainWindow>:
@@ -34,6 +39,9 @@
     anno: anno
     luogo_di_nascita: luogo_di_nascita
     professione: professione
+    patenteA: patenteA
+    patenteB: patenteB
+    patenteC: patenteC
 
     BoxLayout:
         padding: 20
@@ -116,20 +124,36 @@
                     text: "Scegli opzione"
                     values: ["studente", "lavoratore", "disoccupato", "pensionato", "artista"]
             BoxLayout:
+                size_hint_y: None
+                height: 30
+                BlackLabel:
+                    text: "Patenti in possesso"
+                BoxLayout:
+                    BlackLabel:
+                        text: "Patente A"
+                    CheckBox:
+                        id: patenteA
+                        color: (0,0,0)
+                    BlackLabel:
+                        text: "Patente B"
+                    CheckBox:
+                        id: patenteB
+                        color: (0,0,0)
+                    BlackLabel:
+                        text: "Patente C"
+                    CheckBox:
+                        id: patenteC
+                        color: (0,0,0)
+
+            BoxLayout:
         BoxLayout:
             id: button
             size_hint_y: .1
             Label:
-            Button:
+            CustomButton:
                 id: submit_button
-                background_normal: ""
-                background_color: (1, 0.5, 0, 1)
                 text: "Invia"
-                on_press:
-                    self.background_color = (1, 0, 0, 0.8)
-                on_release:
-                    self.background_color = (1, 0.5, 0, 1)
-                    root.conferma_invio_form()
+                on_release: root.conferma_invio_form()
             Label:
 
 
@@ -177,13 +201,20 @@
         Label:
             color: (0, 0, 0, 1)
             text: "Grazie per aver compilato il form"
-        Button:
-            size_hint_y: None
-            height: 50
-            text: "indietro"
-            on_release:
-                root.go_back()
-
+        BoxLayout:
+            spacing: 10
+            padding: 10
+            orientation: "horizontal"
+            CustomButton:
+                size_hint_y: None
+                height: 50
+                text: "indietro"
+                on_release: root.go_back()
+            CustomButton:
+                size_hint_y: None
+                height: 50
+                text: "esci"
+                on_release: exit()
 
 
 
