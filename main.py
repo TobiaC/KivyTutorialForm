@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.app import App
