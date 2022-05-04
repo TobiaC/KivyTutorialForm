@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.app import App
@@ -7,6 +6,9 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen, ScreenManager, WipeTransition, SlideTransition
 from kivy.uix.dropdown import DropDown
 
+from tinydb import TinyDB
+
+db = TinyDB('db.json')
 
 class CustomDropDown(DropDown):
     pass
@@ -47,37 +49,26 @@ class MainWindow(Screen):
         return self.giorno.text + " " + self.mese.text + " " + self.anno.text
 
     def invia_form(self):
-        patenti = "Patenti in possesso: "
-        '''
-        MODIFY: crea (o modifica) un file su desktop contenente le informazioni immesse nei campi
-                modifica la schermata visualizzata passando alla SecondWindow
-        '''
-        form = open("/home/tobiac/Scrivania/form.txt", "w+")
-        form.write("Nome: ")
-        form.write(self.nome.text)
-        form.write("\n")
-        form.write("Cognome: ")
-        form.write(self.cognome.text)
-        form.write("\n")
-        form.write("Data di nascita: ")
-        form.write(self.ottieni_data_nascita())
-        form.write("\n")
-        form.write("Luogo di nascita: ")
-        form.write(self.luogo_di_nascita.text)
-        form.write("\n")
-        form.write("professione: " + self.professione.text)
-        form.write("\n")
+        patenti = []
+
         if self.patenteA.active:
-            patenti = patenti + "A "
+            patenti.append('A')
         if self.patenteB.active:
-            patenti = patenti + "B "
+            patenti.append('B')
         if self.patenteC.active:
-            patenti = patenti + "C "
-        form.write(patenti)
+            patenti.append('C')
+
+        db.insert({'nome':self.nome.text, 'cognome':self.cognome.text, 'data_di_nascita':self.ottieni_data_nascita(),'luogo di nascita':self.luogo_di_nascita.text,'professione':self.professione.text, 'patenti':patenti})
+        print(db.all())
         sm.switch_to(screens[1], direction="left")
 
 
 class SecondWindow(Screen):
+    #data_riassunto = ObjectProperty(None)
+
+    def ottieni_dati(self):
+        pass
+
     def go_back(self):
         '''
         MODIFY: cambia la finestra visualizzata passando alla MainWindow

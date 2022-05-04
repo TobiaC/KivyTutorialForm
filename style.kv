@@ -189,6 +189,7 @@
 
 # definizione stile schermata SecondWindow
 <SecondWindow>:
+    data_riassunto: data_riassunto
     name: "secondwindow"
     BoxLayout:
         canvas.before:
@@ -198,9 +199,17 @@
                 size: self.size
                 pos: self.pos
         orientation: "vertical"
-        Label:
-            color: (0, 0, 0, 1)
-            text: "Grazie per aver compilato il form"
+
+        # ScrollView:
+        #     do_scroll_x: False
+        #     do_scroll_y: True
+        #     BoxLayout:
+        #         padding: 20
+        #         size_hint_y: None
+        #         height: self.minimum_height
+        #         orientation:'vertical'
+        #         id: data_riassunto   
+
         BoxLayout:
             spacing: 10
             padding: 10
@@ -210,16 +219,14 @@
                 height: 50
                 text: "indietro"
                 on_release: root.go_back()
+            # CustomButton:
+            #     size_hint_y: None
+            #     height: 50
+            #     text: "ottieni dati"
+            #     on_release: root.ottieni_dati()
             CustomButton:
                 size_hint_y: None
                 height: 50
                 text: "esci"
                 on_release: exit()
-
-
-
-
-
-
-
-
+                
