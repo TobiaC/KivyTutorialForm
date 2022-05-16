@@ -44,7 +44,8 @@
     patenteC: patenteC
 
     BoxLayout:
-        padding: 20
+        padding: 20,100,20,20
+        spacing: 30
         id: main_box
         canvas.before:
             Color:
@@ -55,20 +56,21 @@
         orientation: "vertical"
         BoxLayout:
             id: title
-            size_hint_y: 0.20
+            size_hint_y: 0.1
             TitleLabel:
-                font_size: 30
+                font_size: 50
                 bold: True
                 text: "Form da compilare"
         BoxLayout:
             padding: 20
-            spacing: 10
+            spacing: 30
             id: fields
             orientation: "vertical"
             BoxLayout:
-                size_hint_y: None
-                height: 30
+                spacing: 5
+                size_hint_y: .3
                 BlackLabel:
+                    size_hint_x: .4
                     text: "Nome"
                 CustomTextInput:
                     id: nome
@@ -76,19 +78,21 @@
                     hint_text: "Nome"
                     halign: "center"
             BoxLayout:
-                size_hint_y: None
-                height: 30
+                spacing: 5
+                size_hint_y: .3
                 BlackLabel:
+                    size_hint_x: .4
                     text: "Cognome"
                 CustomTextInput:
                     id: cognome
                     hint_text: "Cognome"
                     multiline: False
             BoxLayout:
-                size_hint_y: None
-                height: 30
+                spacing: 5
+                size_hint_y: .3
                 BlackLabel:
-                    text: "Data di nascita"
+                    size_hint_x: .4
+                    text: "Data di\nnascita"
                 BoxLayout:
                     id: data_di_nascita
                     orientation: "horizontal"
@@ -106,29 +110,34 @@
                         text: "anno"
                         values: ["2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990"]
             BoxLayout:
-                size_hint_y: None
-                height: 30
-                BlackLabel:
-                    text: "Luogo di nascita"
+                spacing: 5
+                size_hint_y: .3
+                BlackLabel: 
+                    size_hint_x: .4
+                    text: "Luogo di\nnascita"
                 CustomTextInput:
                     id: luogo_di_nascita
                     hint_text: "Luogo di nascita"
                     multiline: False
             BoxLayout:
-                size_hint_y: None
-                height: 30
+                spacing: 5
+                size_hint_y: .3
                 BlackLabel:
+                    size_hint_x: .4
                     text: "Professione"
                 CustomSpinner:
                     id: professione
                     text: "Scegli opzione"
                     values: ["studente", "lavoratore", "disoccupato", "pensionato", "artista"]
             BoxLayout:
-                size_hint_y: None
-                height: 30
+                orientation: 'vertical'
+                # size_hint_y: None
+                # height: 30
                 BlackLabel:
                     text: "Patenti in possesso"
                 BoxLayout:
+                    orientation: 'vertical'
+                    spacing: 20
                     BlackLabel:
                         text: "Patente A"
                     CheckBox:
@@ -144,8 +153,6 @@
                     CheckBox:
                         id: patenteC
                         color: (0,0,0)
-
-            BoxLayout:
         BoxLayout:
             id: button
             size_hint_y: .1
@@ -172,16 +179,13 @@
             text: "Sei sicuro di inviare il form?"
             color: ( (1, 0.5, 0, 1))
         BoxLayout:
+            size_hint_y: .1
             Button:
-                size_hint_y: None
-                height: 50
                 text: "Cancel"
                 on_release:
                     root.dismiss_popup()
             Button:
                 id: invia_form
-                size_hint_y: None
-                height: 50
                 text: "Invia"
                 on_release:
                     root.invia_form()
@@ -199,34 +203,40 @@
                 size: self.size
                 pos: self.pos
         orientation: "vertical"
-
-        # ScrollView:
-        #     do_scroll_x: False
-        #     do_scroll_y: True
-        #     BoxLayout:
-        #         padding: 20
-        #         size_hint_y: None
-        #         height: self.minimum_height
-        #         orientation:'vertical'
-        #         id: data_riassunto   
+        padding: 20,100,20,20
+        spacing: 20
+        
+        ScrollView:
+            padding: 20,100,20,20
+            canvas.before:
+                Color:
+                    rgba: (1,0.9,0.8,1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            size_hint_y: .9
+            do_scroll_x: False
+            do_scroll_y: True
+            BoxLayout:
+                padding: 20
+                spacing: 50
+                size_hint_y: None
+                height: self.minimum_height
+                orientation:'vertical'
+                id: data_riassunto   
 
         BoxLayout:
-            spacing: 10
+            spacing: 20
             padding: 10
             orientation: "horizontal"
+            size_hint_y:.1
             CustomButton:
-                size_hint_y: None
-                height: 50
                 text: "indietro"
                 on_release: root.go_back()
-            # CustomButton:
-            #     size_hint_y: None
-            #     height: 50
-            #     text: "ottieni dati"
-            #     on_release: root.ottieni_dati()
             CustomButton:
-                size_hint_y: None
-                height: 50
+                text: "ottieni dati"
+                on_release: root.ottieni_dati()
+            CustomButton:
                 text: "esci"
                 on_release: exit()
                 

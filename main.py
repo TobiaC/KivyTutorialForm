@@ -6,6 +6,10 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen, ScreenManager, WipeTransition, SlideTransition
 from kivy.uix.dropdown import DropDown
 
+
+from kivy.core.window import Window
+Window.size = (1080, 1920)
+
 from tinydb import TinyDB
 
 db = TinyDB('db.json')
@@ -42,7 +46,7 @@ class MainWindow(Screen):
         '''
         MODIFY: crea una finestra popup per una conferma di invio del form compilato
         '''
-        custom_popup = CustomPopup(title="Conferma invio form", size_hint=(0.5, 0.5), invia_form=self.invia_form)
+        custom_popup = CustomPopup(title="Conferma invio form", size_hint=(0.9, 0.9), invia_form=self.invia_form)
         custom_popup.open()
 
     def ottieni_data_nascita(self):
@@ -62,17 +66,24 @@ class MainWindow(Screen):
         print(db.all())
         sm.switch_to(screens[1], direction="left")
 
+from kivy.uix.label import Label
 
 class SecondWindow(Screen):
-    #data_riassunto = ObjectProperty(None)
+    data_riassunto = ObjectProperty(None)
 
     def ottieni_dati(self):
-        pass
+        for user in db:
+            for key,value in user.items():
+                text = str(key) + ": " + str(value) + "\n"
+                self.data_riassunto.add_widget( Label(text="\n" + text, color=(0,0,0,1)) )
+            self.data_riassunto.add_widget(Label(text="-----------------------", color=(0,0,0,1)))
+            
 
     def go_back(self):
         '''
         MODIFY: cambia la finestra visualizzata passando alla MainWindow
         '''
+        self.data_riassunto.clear_widgets()
         sm.switch_to(screens[0], direction="right")
 
 
